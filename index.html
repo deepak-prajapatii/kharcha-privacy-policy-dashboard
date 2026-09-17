@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kharcha Privacy Policy</title>
+<meta name="description" content="How the Kharcha expense tracker app handles your data.">
+<style>
+  :root {
+    --bg: #f7f7f5; --card: #ffffff; --ink: #1b1d1f; --sub: #5b6167; --line: #e4e4e0; --brand: #0f7b5f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #111315; --card: #1a1d20; --ink: #eceef0; --sub: #a3a9ae; --line: #2a2e32; --brand: #4cc59f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  main { max-width: 760px; margin: 0 auto; padding: 40px 16px 64px; }
+  h1 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 6px; }
+  h2 { font-size: 1.2rem; margin: 36px 0 8px; }
+  p, li { color: var(--ink); }
+  .meta { color: var(--sub); margin: 0 0 24px; }
+  .summary { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--brand); border-radius: 12px; padding: 16px 20px; }
+  .summary ul { margin: 0; padding-left: 20px; }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+  th { font-size: .85rem; color: var(--sub); }
+  tr:last-child td { border-bottom: 0; }
+  a { color: var(--brand); }
+  footer { margin-top: 48px; color: var(--sub); font-size: .9rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Kharcha Privacy Policy</h1>
+  <p class="meta">Effective date: 17 September 2026</p>
+
+  <p>Kharcha is an expense tracker that records your spends from bank and UPI notifications on your phone. This policy explains what the app reads, where that information is kept, and the few things that leave your device.</p>
+
+  <div class="summary">
+    <ul>
+      <li>Your transactions are stored <strong>only on your phone</strong>.</li>
+      <li>The app does <strong>not</strong> read your SMS messages.</li>
+      <li>There is no account, no ads, and no analytics tracking.</li>
+      <li>We do not sell or share your financial information with anyone.</li>
+      <li>The only data sent off your phone is crash reports, which never contain your notification text.</li>
+    </ul>
+  </div>
+
+  <h2>1. Information the app reads</h2>
+  <p><strong>Notifications.</strong> When you grant notification access, Kharcha reads incoming notifications to find bank, card and UPI alerts. When an alert describes a transaction, the app extracts the amount, merchant or payee, date, masked account digits (last 4) and reference number, and saves them along with the original alert text so you can see where the entry came from. Notifications that are not transactions are ignored and not stored. If a bank alert cannot be read, only a count of such alerts is kept, not their text.</p>
+  <p><strong>Camera.</strong> When you choose to scan a receipt, the camera image is processed on your phone to read the text. The photo is never saved or uploaded. The text read from the receipt is saved with the expense on your phone.</p>
+  <p><strong>What you enter.</strong> Expenses you add by hand, categories you change, and budgets you set.</p>
+
+  <h2>2. Where your information is stored</h2>
+  <p>All transactions, budgets and settings are stored in the app's private storage on your phone. The app does not use Android's automatic cloud backup, so this data is not copied to any server. If you use <em>Export as CSV</em>, a file is saved to a location you choose; what happens to that file afterwards is up to you.</p>
+
+  <h2>3. Information that leaves your phone</h2>
+  <p><strong>Crash reports (Firebase Crashlytics by Google).</strong> If the app crashes or hits an error, a report is sent to help us fix it. It includes technical details such as device model, Android version, app version, a random installation identifier, the stack trace, and short error messages. The app is designed so that notification text, amounts and merchant names are never included in these reports. See <a href="https://firebase.google.com/support/privacy" rel="noopener">Firebase privacy information</a>.</p>
+  <p><strong>Google Play services.</strong> Receipt scanning uses Google ML Kit, whose text-recognition model is downloaded and managed by Google Play services. Recognition itself runs on your device.</p>
+
+  <h2>4. Features not yet available</h2>
+  <p>The app shows <em>Cloud assist</em> and <em>Google Drive sync</em> as "Coming soon". They are switched off and cannot be turned on in this version, so no data is sent to Google's AI services or to Google Drive. Before either feature is enabled we will update this policy to explain exactly what is sent, and both will be optional and off by default.</p>
+
+  <h2>5. Permissions</h2>
+  <table>
+    <thead><tr><th>Permission</th><th>Why it is used</th></tr></thead>
+    <tbody>
+      <tr><td>Notification access</td><td>To read bank and UPI alerts and record transactions automatically. You can turn it off any time in Android Settings.</td></tr>
+      <tr><td>Camera</td><td>Only when you scan a receipt.</td></tr>
+      <tr><td>Post notifications</td><td>To warn you when a budget is nearly used or exceeded.</td></tr>
+      <tr><td>Biometric / screen lock</td><td>Only if you turn on App lock. Your fingerprint or face data never reaches the app; Android handles it.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>6. Sharing and selling</h2>
+  <p>We do not sell, rent or share your personal or financial information. The app contains no advertising and no advertising identifiers. The only third party that receives any data is Google, as a service provider for crash reporting described above.</p>
+
+  <h2>7. Retention and deletion</h2>
+  <ul>
+    <li>Delete any transaction inside the app at any time.</li>
+    <li>Clear all app data from Android Settings &gt; Apps &gt; Kharcha &gt; Storage &gt; Clear storage.</li>
+    <li>Uninstalling the app deletes all data stored by it on your phone.</li>
+    <li>Crash reports are kept by Firebase Crashlytics for up to 90 days and then deleted automatically.</li>
+  </ul>
+  <p>Because we have no account or server copy of your transactions, we cannot see or recover them for you.</p>
+
+  <h2>8. Security</h2>
+  <p>Your data stays in the app's private storage, which other apps cannot access. You can add App lock (fingerprint or screen lock) and hide the app preview in the recent apps screen, which also blocks screenshots. Data sent for crash reporting is encrypted in transit.</p>
+
+  <h2>9. Children</h2>
+  <p>Kharcha is intended for adults (18 and over) and is not directed at children. We do not knowingly collect information from children.</p>
+
+  <h2>10. Changes to this policy</h2>
+  <p>If this policy changes, the updated version will be posted on this page with a new effective date. Significant changes, such as enabling a feature that sends data off your phone, will also be shown in the app.</p>
+
+  <h2>11. Contact</h2>
+  <p>Questions or requests about your privacy: <a href="mailto:novatrixlabs.in@gmail.com">novatrixlabs.in@gmail.com</a></p>
+
+  <footer>Kharcha &middot; Privacy Policy</footer>
+</main>
+</body>
+</html>
