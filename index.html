@@ -4,102 +4,318 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kharcha Privacy Policy</title>
-<meta name="description" content="How the Kharcha expense tracker app handles your data.">
+<meta name="description" content="How Kharcha, the automatic expense tracker, handles your data. Your spends stay on your phone.">
+<meta name="theme-color" content="#0E8A5F">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108 108'%3E%3Crect width='108' height='108' rx='28' fill='%230E8A5F'/%3E%3Cpath fill='%23fff' fill-rule='evenodd' d='M42,30h24a12,12 0 0 1 12,12v24a12,12 0 0 1 -12,12h-24a12,12 0 0 1 -12,-12v-24a12,12 0 0 1 12,-12z M46,48h16a6,6 0 0 1 0,12h-16a6,6 0 0 1 0,-12z'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+  /* Tokens mirror core/designsystem/Color.kt so the page looks like the app. */
   :root {
-    --bg: #f7f7f5; --card: #ffffff; --ink: #1b1d1f; --sub: #5b6167; --line: #e4e4e0; --brand: #0f7b5f;
+    --background: #F2F4F3; --card: #FFFFFF; --ink: #16181A; --sub: #6C7278; --subtle: #9AA0A6; --line: #EAECEE;
+    --brand: #0E8A5F; --on-brand: #FFFFFF; --brand-tint: #E4F3EC;
+    --warn: #FF5A1F; --warn-tint: #FFEDE5; --info: #1A73E8; --info-tint: #E6F1FF;
+    --accent: #7B45E0; --accent-tint: #F1E9FF; --amber: #C98A00; --amber-tint: #FFF3D6;
+    --shadow: 0 1px 2px rgba(16, 24, 20, .04), 0 8px 24px rgba(16, 24, 20, .05);
+    color-scheme: light;
   }
   @media (prefers-color-scheme: dark) {
-    :root { --bg: #111315; --card: #1a1d20; --ink: #eceef0; --sub: #a3a9ae; --line: #2a2e32; --brand: #4cc59f; }
+    :root:not([data-theme="light"]) {
+      --background: #0F1113; --card: #191C1F; --ink: #F1F3F4; --sub: #9BA1A8; --subtle: #6D747B; --line: #25292D;
+      --brand: #2EC48D; --on-brand: #06231A; --brand-tint: #12332A;
+      --warn: #FF7A47; --warn-tint: #3A2115; --info: #5AA0F5; --info-tint: #152535;
+      --accent: #A67BFF; --accent-tint: #241A38; --amber: #E0A72A; --amber-tint: #332714;
+      --shadow: none; color-scheme: dark;
+    }
   }
+  :root[data-theme="dark"] {
+    --background: #0F1113; --card: #191C1F; --ink: #F1F3F4; --sub: #9BA1A8; --subtle: #6D747B; --line: #25292D;
+    --brand: #2EC48D; --on-brand: #06231A; --brand-tint: #12332A;
+    --warn: #FF7A47; --warn-tint: #3A2115; --info: #5AA0F5; --info-tint: #152535;
+    --accent: #A67BFF; --accent-tint: #241A38; --amber: #E0A72A; --amber-tint: #332714;
+    --shadow: none; color-scheme: dark;
+  }
+
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
-    margin: 0; background: var(--bg); color: var(--ink);
-    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0; background: var(--background); color: var(--ink);
+    font: 400 16px/1.65 "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased; overflow-wrap: anywhere;
   }
-  main { max-width: 760px; margin: 0 auto; padding: 40px 16px 64px; }
-  h1 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 6px; }
-  h2 { font-size: 1.2rem; margin: 36px 0 8px; }
-  p, li { color: var(--ink); }
-  .meta { color: var(--sub); margin: 0 0 24px; }
-  .summary { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--brand); border-radius: 12px; padding: 16px 20px; }
-  .summary ul { margin: 0; padding-left: 20px; }
-  table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
-  th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); }
-  th { font-size: .85rem; color: var(--sub); }
-  tr:last-child td { border-bottom: 0; }
-  a { color: var(--brand); }
-  footer { margin-top: 48px; color: var(--sub); font-size: .9rem; }
+  a { color: var(--brand); font-weight: 600; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  svg.i { width: 20px; height: 20px; fill: currentColor; flex: none; }
+
+  .bar { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--card) 88%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+  .bar-in { max-width: 820px; margin: 0 auto; padding: 10px 16px; display: flex; align-items: center; gap: 10px; }
+  .bar-name { font-weight: 800; font-size: 1.05rem; letter-spacing: -.01em; }
+  .theme { margin-left: auto; width: 38px; height: 38px; border-radius: 12px; border: 1px solid var(--line); background: var(--card); color: var(--sub); display: grid; place-items: center; cursor: pointer; }
+  .theme:hover { color: var(--ink); }
+  .theme .sun { display: none; }
+  :root[data-theme="dark"] .theme .sun { display: block; }
+  :root[data-theme="dark"] .theme .moon { display: none; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) .theme .sun { display: block; }
+    :root:not([data-theme]) .theme .moon { display: none; }
+  }
+
+  main { max-width: 820px; margin: 0 auto; padding: 24px 16px 56px; }
+
+  .hero { position: relative; overflow: hidden; background: #0E8A5F; color: #FFFFFF; border-radius: 28px; padding: 36px 28px 32px; }
+  .hero::after { content: ""; position: absolute; right: -60px; top: -60px; width: 240px; height: 240px; border-radius: 64px; background: rgba(255,255,255,.08); transform: rotate(18deg); }
+  .hero-logo { width: 64px; height: 64px; border-radius: 18px; background: rgba(255,255,255,.16); display: grid; place-items: center; margin-bottom: 18px; }
+  .hero-logo svg { width: 64px; height: 64px; }
+  .hero h1 { margin: 0; font-size: clamp(1.8rem, 5vw, 2.5rem); line-height: 1.12; font-weight: 800; letter-spacing: -.02em; }
+  .hero p { margin: 10px 0 0; max-width: 560px; opacity: .92; }
+  .chip { display: inline-block; margin-top: 18px; padding: 5px 12px; border-radius: 999px; background: rgba(255,255,255,.18); font-size: .8rem; font-weight: 700; letter-spacing: .04em; }
+
+  .highlights { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 16px 0 8px; }
+  .hl { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 16px; box-shadow: var(--shadow); }
+  .hl b { display: block; margin-top: 10px; font-size: .98rem; line-height: 1.3; }
+  .hl span { display: block; margin-top: 2px; color: var(--sub); font-size: .86rem; line-height: 1.45; }
+
+  .tile { width: 40px; height: 40px; border-radius: 13px; display: grid; place-items: center; flex: none; }
+  .t-brand { background: var(--brand-tint); color: var(--brand); }
+  .t-warn { background: var(--warn-tint); color: var(--warn); }
+  .t-info { background: var(--info-tint); color: var(--info); }
+  .t-accent { background: var(--accent-tint); color: var(--accent); }
+  .t-amber { background: var(--amber-tint); color: var(--amber); }
+
+  .label { margin: 28px 2px 10px; font-size: .74rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--sub); }
+  .toc { display: flex; flex-wrap: wrap; gap: 8px; }
+  .toc a { padding: 7px 12px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); color: var(--ink); font-size: .86rem; font-weight: 600; }
+  .toc a:hover { border-color: var(--brand); color: var(--brand); text-decoration: none; }
+
+  section { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 22px 22px 18px; margin-top: 14px; box-shadow: var(--shadow); scroll-margin-top: 72px; }
+  section h2 { display: flex; align-items: center; gap: 12px; margin: 0 0 10px; font-size: 1.15rem; font-weight: 800; letter-spacing: -.01em; }
+  .num { width: 28px; height: 28px; border-radius: 9px; background: var(--brand-tint); color: var(--brand); font-size: .82rem; display: grid; place-items: center; flex: none; }
+  section p { margin: 8px 0; color: var(--ink); }
+  section p.muted, .muted { color: var(--sub); }
+  section ul { margin: 8px 0; padding-left: 20px; }
+  section li { margin: 4px 0; }
+  section li::marker { color: var(--brand); }
+
+  .rows { margin-top: 6px; }
+  .row { display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; border-top: 1px solid var(--line); }
+  .row:first-child { border-top: 0; }
+  .row b { display: block; font-size: .98rem; }
+  .row span { display: block; color: var(--sub); font-size: .92rem; line-height: 1.5; }
+  .row span.pill { display: inline-block; font-size: .72rem; line-height: 1.6; }
+  .pill { display: inline-block; margin-left: 6px; padding: 2px 9px; border-radius: 999px; background: var(--line); color: var(--sub); font-size: .72rem; font-weight: 700; vertical-align: 2px; }
+  .pill.ok { background: var(--brand-tint); color: var(--brand); }
+
+  .note { display: flex; gap: 10px; margin-top: 12px; padding: 12px 14px; border-radius: 14px; background: var(--background); color: var(--sub); font-size: .92rem; }
+  .note svg { margin-top: 2px; }
+
+  .contact { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; justify-content: space-between; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 14px; background: var(--brand); color: var(--on-brand); font-weight: 700; }
+  .btn:hover { text-decoration: none; filter: brightness(1.05); }
+
+  footer { margin-top: 28px; display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--subtle); font-size: .86rem; }
+  footer svg { width: 20px; height: 20px; }
+
+  @media (max-width: 560px) {
+    .hero { padding: 28px 20px 24px; border-radius: 24px; }
+    section { padding: 18px 16px 14px; border-radius: 20px; }
+  }
 </style>
+<script>
+  // Remembers a manual light/dark choice for this browser only; the page works without it.
+  try { const t = localStorage.getItem("kharcha-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
 </head>
 <body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <!-- Icon paths are the app's own vector drawables (app/src/main/res/drawable). -->
+  <symbol id="logo" viewBox="0 0 108 108"><path fill-rule="evenodd" d="M42,30h24a12,12 0 0 1 12,12v24a12,12 0 0 1 -12,12h-24a12,12 0 0 1 -12,-12v-24a12,12 0 0 1 12,-12z M46,48h16a6,6 0 0 1 0,12h-16a6,6 0 0 1 0,-12z"/></symbol>
+  <symbol id="bell" viewBox="0 0 24 24"><path d="M12,2.4a6.6,6.6 0 0 1 6.6,6.6v3.3l1.4,2.4a1.1,1.1 0 0 1 -1,1.7H5a1.1,1.1 0 0 1 -1,-1.7l1.4,-2.4V9A6.6,6.6 0 0 1 12,2.4zM9.7,18.3h4.6a2.3,2.3 0 0 1 -4.6,0z"/></symbol>
+  <symbol id="camera" viewBox="0 0 24 24"><path d="M9.2,4.4A2,2 0 0 1 10.9,3.5h2.2a2,2 0 0 1 1.7,0.9l0.7,1.1H19a3,3 0 0 1 3,3v8a3,3 0 0 1 -3,3H5a3,3 0 0 1 -3,-3v-8a3,3 0 0 1 3,-3h3.5zM12,9.1a3.4,3.4 0 1 0 0,6.8a3.4,3.4 0 0 0 0,-6.8z"/></symbol>
+  <symbol id="lock" viewBox="0 0 24 24"><path d="M12,2.2a4.6,4.6 0 0 1 4.6,4.6v2.4h0.4a2.5,2.5 0 0 1 2.5,2.5v7a2.5,2.5 0 0 1 -2.5,2.5H7a2.5,2.5 0 0 1 -2.5,-2.5v-7A2.5,2.5 0 0 1 7,9.2h0.4V6.8A4.6,4.6 0 0 1 12,2.2zM12,4.4a2.4,2.4 0 0 0 -2.4,2.4v2.4h4.8V6.8A2.4,2.4 0 0 0 12,4.4z"/></symbol>
+  <symbol id="cloud" viewBox="0 0 24 24"><path d="M6.8,19.4a4.6,4.6 0 0 1 -0.5,-9.16a6.1,6.1 0 0 1 11.7,1.7a3.9,3.9 0 0 1 -0.5,7.46z"/></symbol>
+  <symbol id="delete" viewBox="0 0 24 24"><path d="M9.4,2.8h5.2a1.1,1.1 0 0 1 1.1,1.1v0.9h4a1.1,1.1 0 0 1 0,2.2H4.3a1.1,1.1 0 0 1 0,-2.2h4v-0.9a1.1,1.1 0 0 1 1.1,-1.1zM6,9.2h12l-0.85,10.5A2,2 0 0 1 15.16,21.5H8.84a2,2 0 0 1 -2,-1.8z"/></symbol>
+  <symbol id="eyeoff" viewBox="0 0 24 24"><path d="M3.3,3.3a1.1,1.1 0 0 1 1.6,0l15.8,15.8a1.1,1.1 0 0 1 -1.6,1.6l-2.9,-2.9a10.7,10.7 0 0 1 -4.2,0.9c-4.4,0 -8.2,-2.7 -10,-6.7a12.4,12.4 0 0 1 3.5,-4.4L3.3,4.9a1.1,1.1 0 0 1 0,-1.6zM12,6.4c4.4,0 8.2,2.7 10,6.7a12.5,12.5 0 0 1 -2.4,3.4L9.9,6.8A10.8,10.8 0 0 1 12,6.4z"/></symbol>
+  <symbol id="download" viewBox="0 0 24 24"><path d="M12,2.8a1.1,1.1 0 0 1 1.1,1.1v9.3l3,-3a1.1,1.1 0 0 1 1.6,1.5l-4.9,4.9a1.1,1.1 0 0 1 -1.6,0l-4.9,-4.9a1.1,1.1 0 0 1 1.6,-1.5l3,3V3.9A1.1,1.1 0 0 1 12,2.8zM4,18.5h16a1.1,1.1 0 0 1 0,2.2H4a1.1,1.1 0 0 1 0,-2.2z"/></symbol>
+  <symbol id="bolt" viewBox="0 0 24 24"><path d="M13,2.5L3.4,13.4a0.8,0.8 0 0 0 0.6,1.3h5.2l-1.3,7.1a0.8,0.8 0 0 0 1.4,0.6l9.5,-10.9a0.8,0.8 0 0 0 -0.6,-1.3h-5.1l1.3,-7.1a0.8,0.8 0 0 0 -1.4,-0.6z"/></symbol>
+  <symbol id="info" viewBox="0 0 24 24"><path d="M12,2.6a9.4,9.4 0 1 0 0,18.8a9.4,9.4 0 0 0 0,-18.8zM12,6.6a1.3,1.3 0 1 1 0,2.6a1.3,1.3 0 0 1 0,-2.6zM12,10.8a1.1,1.1 0 0 1 1.1,1.1v5a1.1,1.1 0 0 1 -2.2,0v-5a1.1,1.1 0 0 1 1.1,-1.1z"/></symbol>
+  <symbol id="moon" viewBox="0 0 24 24"><path d="M20.3,14.6A8.6,8.6 0 0 1 9.4,3.7a8.6,8.6 0 1 0 10.9,10.9z"/></symbol>
+  <symbol id="sun" viewBox="0 0 24 24"><path d="M12,7a5,5 0 1 1 0,10a5,5 0 0 1 0,-10zM11,1.5h2v3h-2zM11,19.5h2v3h-2zM1.5,11h3v2h-3zM19.5,11h3v2h-3zM4.2,5.6l1.4,-1.4l2.1,2.1l-1.4,1.4zM16.3,17.7l1.4,-1.4l2.1,2.1l-1.4,1.4zM4.2,18.4l2.1,-2.1l1.4,1.4l-2.1,2.1zM16.3,6.3l2.1,-2.1l1.4,1.4l-2.1,2.1z"/></symbol>
+</svg>
+
+<header class="bar">
+  <div class="bar-in">
+    <svg viewBox="0 0 108 108" width="32" height="32" aria-hidden="true"><rect width="108" height="108" rx="28" fill="#0E8A5F"/><use href="#logo" fill="#fff"/></svg>
+    <span class="bar-name">Kharcha</span>
+    <button class="theme" type="button" aria-label="Switch light or dark theme" onclick="toggleTheme()">
+      <svg class="i moon"><use href="#moon"/></svg>
+      <svg class="i sun"><use href="#sun"/></svg>
+    </button>
+  </div>
+</header>
+
 <main>
-  <h1>Kharcha Privacy Policy</h1>
-  <p class="meta">Effective date: 17 September 2026</p>
-
-  <p>Kharcha is an expense tracker that records your spends from bank and UPI notifications on your phone. This policy explains what the app reads, where that information is kept, and the few things that leave your device.</p>
-
-  <div class="summary">
-    <ul>
-      <li>Your transactions are stored <strong>only on your phone</strong>.</li>
-      <li>The app does <strong>not</strong> read your SMS messages.</li>
-      <li>There is no account, no ads, and no analytics tracking.</li>
-      <li>We do not sell or share your financial information with anyone.</li>
-      <li>The only data sent off your phone is crash reports, which never contain your notification text.</li>
-    </ul>
+  <div class="hero">
+    <div class="hero-logo"><svg viewBox="0 0 108 108" aria-hidden="true" fill="currentColor"><use href="#logo"/></svg></div>
+    <h1>Privacy Policy</h1>
+    <p>Kharcha files your spends from bank and UPI notifications, right on your phone. Here is exactly what it reads, where that stays, and the little that ever leaves your device.</p>
+    <span class="chip">EFFECTIVE 17 SEPTEMBER 2026</span>
   </div>
 
-  <h2>1. Information the app reads</h2>
-  <p><strong>Notifications.</strong> When you grant notification access, Kharcha reads incoming notifications to find bank, card and UPI alerts. When an alert describes a transaction, the app extracts the amount, merchant or payee, date, masked account digits (last 4) and reference number, and saves them along with the original alert text so you can see where the entry came from. Notifications that are not transactions are ignored and not stored. If a bank alert cannot be read, only a count of such alerts is kept, not their text.</p>
-  <p><strong>Camera.</strong> When you choose to scan a receipt, the camera image is processed on your phone to read the text. The photo is never saved or uploaded. The text read from the receipt is saved with the expense on your phone.</p>
-  <p><strong>What you enter.</strong> Expenses you add by hand, categories you change, and budgets you set.</p>
+  <div class="highlights">
+    <div class="hl"><div class="tile t-brand"><svg class="i"><use href="#lock"/></svg></div><b>Stays on your phone</b><span>Transactions are never uploaded to any server.</span></div>
+    <div class="hl"><div class="tile t-warn"><svg class="i"><use href="#bell"/></svg></div><b>No SMS permission</b><span>Your messages are never read.</span></div>
+    <div class="hl"><div class="tile t-info"><svg class="i"><use href="#bolt"/></svg></div><b>No account, no ads</b><span>No sign-up, no analytics tracking.</span></div>
+    <div class="hl"><div class="tile t-accent"><svg class="i"><use href="#eyeoff"/></svg></div><b>Never sold</b><span>Your financial data is not shared or sold.</span></div>
+  </div>
 
-  <h2>2. Where your information is stored</h2>
-  <p>All transactions, budgets and settings are stored in the app's private storage on your phone. The app does not use Android's automatic cloud backup, so this data is not copied to any server. If you use <em>Export as CSV</em>, a file is saved to a location you choose; what happens to that file afterwards is up to you.</p>
+  <div class="label">On this page</div>
+  <nav class="toc">
+    <a href="#reads">What the app reads</a>
+    <a href="#stored">Where it is stored</a>
+    <a href="#leaves">What leaves your phone</a>
+    <a href="#soon">Coming soon</a>
+    <a href="#permissions">Permissions</a>
+    <a href="#sharing">Sharing</a>
+    <a href="#deletion">Deleting your data</a>
+    <a href="#security">Security</a>
+    <a href="#children">Children</a>
+    <a href="#changes">Changes</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-  <h2>3. Information that leaves your phone</h2>
-  <p><strong>Crash reports (Firebase Crashlytics by Google).</strong> If the app crashes or hits an error, a report is sent to help us fix it. It includes technical details such as device model, Android version, app version, a random installation identifier, the stack trace, and short error messages. The app is designed so that notification text, amounts and merchant names are never included in these reports. See <a href="https://firebase.google.com/support/privacy" rel="noopener">Firebase privacy information</a>.</p>
-  <p><strong>Google Play services.</strong> Receipt scanning uses Google ML Kit, whose text-recognition model is downloaded and managed by Google Play services. Recognition itself runs on your device.</p>
+  <section id="reads">
+    <h2><span class="num">1</span>Information the app reads</h2>
+    <div class="rows">
+      <div class="row">
+        <div class="tile t-brand"><svg class="i"><use href="#bell"/></svg></div>
+        <div><b>Bank and UPI notifications</b><span>With notification access on, Kharcha looks at incoming notifications to find bank, card and UPI alerts. From a transaction alert it takes the amount, merchant or payee, date, the last 4 digits of the account and the reference number, and keeps the original alert text so you can see where each entry came from. Notifications that are not transactions are ignored and not stored. If a bank alert cannot be read, only a count is kept, never its text.</span></div>
+      </div>
+      <div class="row">
+        <div class="tile t-amber"><svg class="i"><use href="#camera"/></svg></div>
+        <div><b>Receipt scans</b><span>When you choose to scan a receipt, the image is read on your phone. The photo is never saved or uploaded. The text read from it is saved with the expense, on your phone.</span></div>
+      </div>
+      <div class="row">
+        <div class="tile t-info"><svg class="i"><use href="#download"/></svg></div>
+        <div><b>What you enter</b><span>Expenses you add yourself, category changes and the budgets you set.</span></div>
+      </div>
+    </div>
+  </section>
 
-  <h2>4. Features not yet available</h2>
-  <p>The app shows <em>Cloud assist</em> and <em>Google Drive sync</em> as "Coming soon". They are switched off and cannot be turned on in this version, so no data is sent to Google's AI services or to Google Drive. Before either feature is enabled we will update this policy to explain exactly what is sent, and both will be optional and off by default.</p>
+  <section id="stored">
+    <h2><span class="num">2</span>Where your information is stored</h2>
+    <p>Transactions, budgets and settings are kept in the app's private storage on your phone. Kharcha opts out of Android's automatic cloud backup, so none of it is copied to a server.</p>
+    <p>If you use <b>Export as CSV</b>, a file is saved wherever you choose. What happens to that file afterwards is up to you.</p>
+  </section>
 
-  <h2>5. Permissions</h2>
-  <table>
-    <thead><tr><th>Permission</th><th>Why it is used</th></tr></thead>
-    <tbody>
-      <tr><td>Notification access</td><td>To read bank and UPI alerts and record transactions automatically. You can turn it off any time in Android Settings.</td></tr>
-      <tr><td>Camera</td><td>Only when you scan a receipt.</td></tr>
-      <tr><td>Post notifications</td><td>To warn you when a budget is nearly used or exceeded.</td></tr>
-      <tr><td>Biometric / screen lock</td><td>Only if you turn on App lock. Your fingerprint or face data never reaches the app; Android handles it.</td></tr>
-    </tbody>
-  </table>
+  <section id="leaves">
+    <h2><span class="num">3</span>Information that leaves your phone</h2>
+    <div class="rows">
+      <div class="row">
+        <div class="tile t-warn"><svg class="i"><use href="#info"/></svg></div>
+        <div><b>Crash reports <span class="pill">Firebase Crashlytics</span></b><span>If the app crashes or hits an error, a technical report is sent so it can be fixed: device model, Android version, app version, a random installation ID, the stack trace and short error messages. Notification text, amounts and merchant names are never included. See <a href="https://firebase.google.com/support/privacy" rel="noopener">Firebase privacy information</a>.</span></div>
+      </div>
+      <div class="row">
+        <div class="tile t-amber"><svg class="i"><use href="#camera"/></svg></div>
+        <div><b>Text recognition model <span class="pill">Google Play services</span></b><span>Receipt scanning uses Google ML Kit. Its model is downloaded and managed by Google Play services; the reading itself happens on your phone.</span></div>
+      </div>
+    </div>
+  </section>
 
-  <h2>6. Sharing and selling</h2>
-  <p>We do not sell, rent or share your personal or financial information. The app contains no advertising and no advertising identifiers. The only third party that receives any data is Google, as a service provider for crash reporting described above.</p>
+  <section id="soon">
+    <h2><span class="num">4</span>Features not yet available</h2>
+    <div class="rows">
+      <div class="row">
+        <div class="tile t-info"><svg class="i"><use href="#cloud"/></svg></div>
+        <div><b>Cloud assist <span class="pill">Coming soon</span></b><span>Switched off in this version. Nothing is sent to Google's AI services.</span></div>
+      </div>
+      <div class="row">
+        <div class="tile t-amber"><svg class="i"><use href="#download"/></svg></div>
+        <div><b>Google Drive sync <span class="pill">Coming soon</span></b><span>Switched off in this version. Nothing is sent to Google Drive.</span></div>
+      </div>
+    </div>
+    <div class="note"><svg class="i"><use href="#info"/></svg><span>Before either feature is turned on, this policy will be updated to explain exactly what is sent. Both will be optional and off by default.</span></div>
+  </section>
 
-  <h2>7. Retention and deletion</h2>
-  <ul>
-    <li>Delete any transaction inside the app at any time.</li>
-    <li>Clear all app data from Android Settings &gt; Apps &gt; Kharcha &gt; Storage &gt; Clear storage.</li>
-    <li>Uninstalling the app deletes all data stored by it on your phone.</li>
-    <li>Crash reports are kept by Firebase Crashlytics for up to 90 days and then deleted automatically.</li>
-  </ul>
-  <p>Because we have no account or server copy of your transactions, we cannot see or recover them for you.</p>
+  <section id="permissions">
+    <h2><span class="num">5</span>Permissions</h2>
+    <div class="rows">
+      <div class="row">
+        <div class="tile t-brand"><svg class="i"><use href="#bell"/></svg></div>
+        <div><b>Notification access</b><span>To read bank and UPI alerts and record spends automatically. Turn it off any time in Android Settings.</span></div>
+      </div>
+      <div class="row">
+        <div class="tile t-amber"><svg class="i"><use href="#camera"/></svg></div>
+        <div><b>Camera</b><span>Only when you scan a receipt.</span></div>
+      </div>
+      <div class="row">
+        <div class="tile t-warn"><svg class="i"><use href="#bolt"/></svg></div>
+        <div><b>Notifications</b><span>To warn you when a budget is nearly used up or exceeded.</span></div>
+      </div>
+      <div class="row">
+        <div class="tile t-accent"><svg class="i"><use href="#lock"/></svg></div>
+        <div><b>Fingerprint or screen lock</b><span>Only if you turn on App lock. Android checks your fingerprint or face; the app never receives that data.</span></div>
+      </div>
+    </div>
+  </section>
 
-  <h2>8. Security</h2>
-  <p>Your data stays in the app's private storage, which other apps cannot access. You can add App lock (fingerprint or screen lock) and hide the app preview in the recent apps screen, which also blocks screenshots. Data sent for crash reporting is encrypted in transit.</p>
+  <section id="sharing">
+    <h2><span class="num">6</span>Sharing and selling</h2>
+    <p>Your personal and financial information is not sold, rented or shared. The app has no advertising and uses no advertising identifiers. The only third party that receives any data is Google, as the crash reporting provider described above.</p>
+  </section>
 
-  <h2>9. Children</h2>
-  <p>Kharcha is intended for adults (18 and over) and is not directed at children. We do not knowingly collect information from children.</p>
+  <section id="deletion">
+    <h2><span class="num">7</span>Keeping and deleting your data</h2>
+    <div class="rows">
+      <div class="row">
+        <div class="tile t-warn"><svg class="i"><use href="#delete"/></svg></div>
+        <div><b>You are in control</b><span>Delete any transaction inside the app. Clear everything from Android Settings › Apps › Kharcha › Storage › Clear storage. Uninstalling the app removes all of its data from your phone.</span></div>
+      </div>
+      <div class="row">
+        <div class="tile t-info"><svg class="i"><use href="#info"/></svg></div>
+        <div><b>Crash reports</b><span>Kept by Firebase Crashlytics for up to 90 days, then deleted automatically.</span></div>
+      </div>
+    </div>
+    <p class="muted">There is no account or server copy of your transactions, so they cannot be seen or recovered by anyone but you.</p>
+  </section>
 
-  <h2>10. Changes to this policy</h2>
-  <p>If this policy changes, the updated version will be posted on this page with a new effective date. Significant changes, such as enabling a feature that sends data off your phone, will also be shown in the app.</p>
+  <section id="security">
+    <h2><span class="num">8</span>Security</h2>
+    <p>Your data lives in the app's private storage, which other apps cannot access. You can turn on <b>App lock</b> (fingerprint or screen lock) and <b>Hide the app preview</b>, which blanks Kharcha in recent apps and blocks screenshots. Crash reports are encrypted in transit.</p>
+  </section>
 
-  <h2>11. Contact</h2>
-  <p>Questions or requests about your privacy: <a href="mailto:novatrixlabs.in@gmail.com">novatrixlabs.in@gmail.com</a></p>
+  <section id="children">
+    <h2><span class="num">9</span>Children</h2>
+    <p>Kharcha is meant for adults (18+) and is not directed at children. No information is knowingly collected from children.</p>
+  </section>
 
-  <footer>Kharcha &middot; Privacy Policy</footer>
+  <section id="changes">
+    <h2><span class="num">10</span>Changes to this policy</h2>
+    <p>Any update will be posted on this page with a new effective date. Significant changes, such as turning on a feature that sends data off your phone, will also be shown in the app.</p>
+  </section>
+
+  <section id="contact">
+    <h2><span class="num">11</span>Contact</h2>
+    <div class="contact">
+      <p class="muted" style="margin:0">Questions or requests about your privacy? Write to us.</p>
+      <a class="btn" href="mailto:novatrixlabs.in@gmail.com">novatrixlabs.in@gmail.com</a>
+    </div>
+  </section>
+
+  <footer>
+    <svg viewBox="0 0 108 108" aria-hidden="true"><rect width="108" height="108" rx="28" fill="#0E8A5F"/><use href="#logo" fill="#fff"/></svg>
+    Kharcha · Privacy Policy
+  </footer>
 </main>
+
+<script>
+  function toggleTheme() {
+    const root = document.documentElement;
+    const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme = dark ? "light" : "dark";
+    try { localStorage.setItem("kharcha-theme", root.dataset.theme); } catch (e) {}
+  }
+</script>
 </body>
 </html>
